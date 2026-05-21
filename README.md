@@ -10,6 +10,7 @@ Body of work, not startup. One steward. Public from day one.
 2. [`docs/NOT.md`](docs/NOT.md) — what VILLE refuses to be
 3. [`docs/manifesto.md`](docs/manifesto.md) — the full v0 direction
 4. [`docs/learning-pack.md`](docs/learning-pack.md) — running log of teaching moments by domain
+5. [`docs/reading-list.md`](docs/reading-list.md) — tiered reading list (papers + soul food)
 
 ## Status
 
