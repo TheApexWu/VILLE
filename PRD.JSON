@@ -1,0 +1,159 @@
+{
+  "project": {
+    "name": "ville",
+    "one_liner": "A pipeline + open spec (cityPack, CC0) + PSX/Shenmue web viewer + essay series for reconstructing lost urban geometry from historical sources with epoch-appropriate ML, beginning with Paris, Roman Lutèce to now.",
+    "full_context": "VILLE is the historical-reconstruction continuation of Sixth Borough (present-day NYC 3D) and Eyes on the Street. It reconstructs lost urban geometry from sparse archival photos, engravings, and archaeological constraint. The intellectual spine is research-grade BUILD-TIME ML (DUSt3R / MASt3R / VGGT, Gaussian Splatting, constrained diffusion) with ZERO runtime ML — the viewer is a pure renderer of pre-baked packs. Every reconstructed element carries a mandatory synthesis_tier in {none,minimal,light,mixed,heavy} so fabulation is always declared, never silent. First city: Paris. First block target: one Île-de-la-Cité block pre-Haussmann with rich Marville (1860s-70s) photo coverage. Full vision, phase plan, and locked theses live in docs/manifesto.md — read it before touching anything. This is a body of work, not a startup: one solo steward, public from day one, no scale/VC/growth/app-store framing (see docs/NOT.md).",
+    "hard_rules": [
+      "ZERO runtime ML. The viewer renders pre-baked packs only; no model ships to the device. Non-negotiable (docs/NOT.md).",
+      "Per-field provenance is mandatory: every geometry element in a pack has a provenance.jsonl row with WHO + WHEN + LICENSE + synthesis_tier.",
+      "synthesis_tier ∈ {none, minimal, light, mixed, heavy}. No element may omit it. Heavy/mixed tiers are declared fabulation under provenance, never passed off as record.",
+      "Spec (/spec) is CC0. Code (/pipeline, /viewer) is MIT. Pack contents (/packs) carry per-upstream-source licenses declared per element.",
+      "The loop NEVER self-certifies a human_gate milestone. It prepares the artifact and stops; Alex renders the verdict. Applies to M3 reconstruction quality, M6 essay quality.",
+      "This codebase is written by an AI loop: comments minimal and only where they inform the next iteration; test only what must survive repeated runs (schema validity, provenance completeness, budget of synthesis tiers).",
+      "Body of work, not startup. If a milestone drifts toward scale / recurring revenue / app-store / co-founder framing, stop and re-read docs/NOT.md."
+    ],
+    "reference_docs": [
+      "docs/manifesto.md — full v0 direction, phase plan, epoch ML stack, cityPack sketch",
+      "docs/WHY.md, docs/NOT.md — why it exists, what it refuses to be",
+      "docs/learning-pack.md + the vault Learning Pack (10 modules) — photogrammetry, geodesy, Bayesian validation, provenance, format design, generative ML, critical cartography, PSX rendering",
+      "docs/reading-list.md — DUSt3R/MASt3R/VGGT, Gaussian Splatting, Overture GERS, critical cartography (Harley/Wood/Pickles/Scott/Glissant)"
+    ]
+  },
+  "defaults": { "model": "openrouter/z-ai/glm-5.2", "effort": "high" },
+  "milestones": [
+    {
+      "id": "0",
+      "name": "Repo scaffold + preflight",
+      "deps": [],
+      "tasks": [
+        "Create target tree: spec/  pipeline/  viewer/  packs/  docs-notes/  evidence/  fixtures/",
+        "Add LICENSE mapping note (CC0 spec / MIT code) and a top-level STATUS.md pointing at the phase plan.",
+        "Write scripts/preflight.sh: assert node>=18, python3>=3.10, git clean-ish, and that ajv-cli + a headless chromium are reachable (install into a local venv/node_modules, never system)."
+      ],
+      "verifications": [
+        "scripts/preflight.sh exits 0",
+        "the six target directories exist",
+        "git tree has no untracked secrets (no *.env, no keys)"
+      ],
+      "human_gate": false,
+      "completed": false
+    },
+    {
+      "id": "1",
+      "name": "cityPack v0.1 spec (CC0)",
+      "deps": ["0"],
+      "tasks": [
+        "Author spec/citypack.schema.json — a JSON Schema for manifest.json: entities with id (Overture GERS primary; OSM id + Wikidata QID fallback), geometry ref (glTF/glb path), and per-element provenance ref.",
+        "Author spec/SPEC.md (~200 lines, CC0) describing the pack layout: manifest.json, geometry/, textures/, fragments/, media/, provenance.jsonl, schema/, methods.md.",
+        "Make synthesis_tier a required enum on every element and provenance row.",
+        "Provide fixtures/sample-manifest.json that is minimal but valid."
+      ],
+      "verifications": [
+        "spec/citypack.schema.json is itself a valid JSON Schema (ajv compile succeeds)",
+        "fixtures/sample-manifest.json validates against the schema via ajv",
+        "a deliberately-broken fixture (missing synthesis_tier) FAILS validation — proving the gate bites"
+      ],
+      "human_gate": false,
+      "completed": false
+    },
+    {
+      "id": "2",
+      "name": "One Île-de-la-Cité block manifest, hand-built",
+      "deps": ["1"],
+      "tasks": [
+        "Pick one pre-Haussmann Île-de-la-Cité block with rich Marville coverage; build packs/ile-de-la-cite-block/manifest.json by hand.",
+        "Populate provenance.jsonl: one row per element with who/when/license/synthesis_tier (this block is mostly 'light' — DUSt3R-from-photo tier — with any inferred infill marked 'mixed'/'heavy').",
+        "Stub geometry/ with placeholder glb refs (real geometry arrives in M3)."
+      ],
+      "verifications": [
+        "packs/ile-de-la-cite-block/manifest.json validates against spec/citypack.schema.json",
+        "every entity in the manifest has a matching provenance.jsonl row (validator in M4 will enforce; here assert 1:1 by count)",
+        "no element omits synthesis_tier"
+      ],
+      "human_gate": false,
+      "completed": false
+    },
+    {
+      "id": "3",
+      "name": "Reconstruction pipeline scaffold (DUSt3R/MASt3R harness)",
+      "deps": ["0"],
+      "tasks": [
+        "pipeline/reconstruct.py: takes a directory of images + config, runs DUSt3R or MASt3R (reference impl), writes a point cloud .ply and a run-manifest recording model/version/params.",
+        "Ship fixtures/photos/ with a tiny public multi-view image set so the harness is runnable without the real archive.",
+        "Design for the real run to happen on GPU (Mac Mini for wiring, rented A100 for the heavy pass) — but the fixture run must complete on CPU/small.",
+        "Write docs-notes/phase2-falsification.md describing HOW Alex judges the real Marville run (this is the human gate)."
+      ],
+      "verifications": [
+        "pipeline/reconstruct.py runs on fixtures/photos/ and emits a .ply with > 0 vertices",
+        "the run-manifest records model id + params",
+        "HUMAN_GATE: reconstruction QUALITY on real archival photos is Alex's verdict — the loop stops after producing the fixture .ply and the phase2 doc; it must NOT mark the real falsification passed"
+      ],
+      "human_gate": true,
+      "completed": false
+    },
+    {
+      "id": "4",
+      "name": "Provenance validator",
+      "deps": ["1"],
+      "tasks": [
+        "pipeline/validate_pack.py: assert every geometry element referenced in manifest.json has a provenance.jsonl row with a valid synthesis_tier and license, and that no orphan provenance rows exist.",
+        "Emit a synthesis-tier histogram (how much of the pack is none/minimal/.../heavy) — the honesty summary."
+      ],
+      "verifications": [
+        "validator PASSES on packs/ile-de-la-cite-block (M2)",
+        "validator FAILS on a fixture pack with a missing provenance row and on one with a bad synthesis_tier",
+        "validator prints the synthesis-tier histogram"
+      ],
+      "human_gate": false,
+      "completed": false
+    },
+    {
+      "id": "5",
+      "name": "PSX/Shenmue web viewer + year-slider",
+      "deps": ["1"],
+      "tasks": [
+        "viewer/: Three.js or R3F + TypeScript, loads a cityPack and renders its geometry with a PSX shader pack (vertex lighting, dithered shadows, soft fog, warm-rust palette, light CRT scanlines).",
+        "Year-slider that crossfades between two epochs of the same block (use M2 pack + a second stub epoch).",
+        "Pure renderer — ZERO runtime ML (hard rule)."
+      ],
+      "verifications": [
+        "viewer builds (vite build exits 0)",
+        "headless chromium screenshot of the built viewer contains a rendering <canvas> and no console errors",
+        "the year-slider DOM control is present and changing it swaps the visible epoch (assert via a DOM/state check in a headless script)"
+      ],
+      "human_gate": false,
+      "completed": false
+    },
+    {
+      "id": "6",
+      "name": "methods.md generator + essay scaffold",
+      "deps": ["2", "4"],
+      "tasks": [
+        "pipeline/gen_methods.py: from a pack's provenance, generate methods.md with the per-epoch synthesis_tier table.",
+        "Draft docs/essays/ile-de-la-cite.md (~2000w scaffold) on Haussmann's clearances and opacity-by-design — structure + evidence hooks, left for Alex to voice."
+      ],
+      "verifications": [
+        "methods.md generated for the M2 pack contains a synthesis_tier table matching the validator histogram",
+        "essay scaffold exists with section headers and provenance citations",
+        "HUMAN_GATE: essay QUALITY/voice is Alex's — loop delivers the scaffold, does not certify it 'done'"
+      ],
+      "human_gate": true,
+      "completed": false
+    },
+    {
+      "id": "7",
+      "name": "First public release packaging",
+      "deps": ["2", "3", "5"],
+      "tasks": [
+        "Wire the viewer to load packs/ile-de-la-cite-block + the M3 pipeline output, produce a static, deploy-ready build.",
+        "Write README release notes linking the pack, methods.md, and the viewer."
+      ],
+      "verifications": [
+        "static build produced; headless screenshot shows the block geometry rendering in the PSX style",
+        "release README links pack + methods.md + viewer and states the synthesis-tier honesty summary"
+      ],
+      "human_gate": false,
+      "completed": false
+    }
+  ]
+}

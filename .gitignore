@@ -44,3 +44,8 @@ scratch/
 local/
 .env
 .env.local
+
+logs/
+opencode.json
+.opencode/
+*.env
