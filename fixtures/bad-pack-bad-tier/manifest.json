@@ -1,0 +1,15 @@
+{
+  "pack": "bad-pack-bad-tier",
+  "spec_version": "0.1",
+  "city": "paris",
+  "epoch": "fixture",
+  "entities": [
+    {
+      "id": { "overture": "0000000000000000000000000000000c" },
+      "name": "Entity with an out-of-enum synthesis_tier",
+      "geometry": "geometry/bad-tier.glb",
+      "provenance": "provenance.jsonl#row-bad-tier",
+      "synthesis_tier": "fabricated"
+    }
+  ]
+}

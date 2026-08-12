@@ -131,7 +131,12 @@
         "validator prints the synthesis-tier histogram"
       ],
       "human_gate": false,
-      "completed": false
+      "completed": true,
+      "evidence": [
+        "validator PASSES on packs/ile-de-la-cite-block: `python3 pipeline/validate_pack.py packs/ile-de-la-cite-block` -> 'validate_pack: PASS — ile-de-la-cite-block (6 entities, all provenance rows resolved)' (exit 0).",
+        "validator FAILS on a fixture pack with a missing provenance row and on one with a bad synthesis_tier: `bad-pack-missing-row` -> exit 1 ('provenance ref has no matching row'); `bad-pack-bad-tier` -> exit 1 ('synthesis_tier must be one of (...); got \"fabricated\"' on both entity and prov row).",
+        "validator prints the synthesis-tier histogram: every run emits a 5-tier histogram (none/minimal/light/mixed/heavy) + evidence-grounded vs fabulated band totals; M2 pack shows 4 light / 1 mixed / 1 heavy, bands 66.7% evidence-grounded / 33.3% fabulated."
+      ]
     },
     {
       "id": "5",

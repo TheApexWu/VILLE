@@ -1,0 +1,22 @@
+{
+  "pack": "bad-pack-missing-row",
+  "spec_version": "0.1",
+  "city": "paris",
+  "epoch": "fixture",
+  "entities": [
+    {
+      "id": { "overture": "0000000000000000000000000000000a" },
+      "name": "Entity with a present provenance row",
+      "geometry": "geometry/present.glb",
+      "provenance": "provenance.jsonl#row-present",
+      "synthesis_tier": "light"
+    },
+    {
+      "id": { "overture": "0000000000000000000000000000000b" },
+      "name": "Entity whose provenance row is missing",
+      "geometry": "geometry/missing.glb",
+      "provenance": "provenance.jsonl#row-missing",
+      "synthesis_tier": "light"
+    }
+  ]
+}
