@@ -64,7 +64,12 @@
         "a deliberately-broken fixture (missing synthesis_tier) FAILS validation — proving the gate bites"
       ],
       "human_gate": false,
-      "completed": false
+      "completed": true,
+      "evidence": [
+        "spec/citypack.schema.json is itself a valid JSON Schema: `ajv compile -s spec/citypack.schema.json --spec=draft2019` -> 'schema spec/citypack.schema.json is valid' (exit 0).",
+        "fixtures/sample-manifest.json validates against the schema via ajv: `ajv validate -s spec/citypack.schema.json -d fixtures/sample-manifest.json --spec=draft2019` -> 'fixtures/sample-manifest.json valid' (exit 0).",
+        "a deliberately-broken fixture (missing synthesis_tier) FAILS validation: `ajv validate -s spec/citypack.schema.json -d fixtures/broken-manifest.json --spec=draft2019` -> invalid with `must have required property 'synthesis_tier'` at `/entities/0` (exit 1) — the gate bites."
+      ]
     },
     {
       "id": "2",

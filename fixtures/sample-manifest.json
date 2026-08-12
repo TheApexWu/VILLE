@@ -1,0 +1,25 @@
+{
+  "pack": "sample-block",
+  "spec_version": "0.1",
+  "city": "paris",
+  "epoch": "1860s-haussmann-pre",
+  "methods": "methods.md",
+  "entities": [
+    {
+      "id": { "overture": "08f0a3f1c4d5e6f7a8b9c0d1e2f3a4b5" },
+      "name": "22 Rue des Chantres",
+      "geometry": "geometry/22-rue-des-chantres.glb",
+      "provenance": "provenance.jsonl#row-22-chantres",
+      "synthesis_tier": "light",
+      "media": ["media/marville-22-chantres-1865.jpg"],
+      "fragments": ["fragments/22-chantres.md"]
+    },
+    {
+      "id": { "osm": "way/123456789", "wikidata": "Q123456" },
+      "name": "Fontaine du Palais (stub)",
+      "geometry": "geometry/fontaine-palais.glb",
+      "provenance": "provenance.jsonl#row-fontaine",
+      "synthesis_tier": "mixed"
+    }
+  ]
+}

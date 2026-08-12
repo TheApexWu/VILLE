@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://ville.spec/citypack.provenance.v0-1.schema.json",
+  "title": "cityPack provenance.jsonl row v0.1",
+  "description": "Schema for one row of a pack's provenance.jsonl (one JSON object per line). Per-field provenance is mandatory (hard rule): every geometry element in a pack has a provenance row with WHO + WHEN + LICENSE + synthesis_tier. Reuses PROV-O / London Charter paradata norms; not a novel format.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["row_id", "entity_id", "who", "when", "license", "synthesis_tier"],
+  "properties": {
+    "row_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable id of this row, referenced from manifest.json entities as 'provenance.jsonl#<row_id>'."
+    },
+    "entity_id": {
+      "description": "Identifier(s) of the entity this row attests. Must match the entity's id overture/osm/wikidata in the manifest.",
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "anyOf": [
+            { "required": ["overture"] },
+            { "required": ["osm", "wikidata"] }
+          ],
+          "properties": {
+            "overture": { "type": "string", "minLength": 1 },
+            "osm": { "type": "string", "minLength": 1 },
+            "wikidata": { "type": "string", "pattern": "^Q[0-9]+$" }
+          }
+        }
+      ]
+    },
+    "who": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Person or organization responsible for the attestation / reconstruction of this element (PROV-O Agent)."
+    },
+    "when": {
+      "type": "string",
+      "description": "ISO 8601 date, date-time, or year (negative years allowed for BCE) when the attestation / reconstruction was produced.",
+      "pattern": "^-?[0-9]{4}(-[0-9]{2}(-[0-9]{2}(T.*)?)?)?$"
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "description": "License under which the source / output is released, e.g. 'CC0', 'CC-BY-SA 4.0', 'public domain', 'BnF Gallica non-commercial'."
+    },
+    "synthesis_tier": {
+      "type": "string",
+      "enum": ["none", "minimal", "light", "mixed", "heavy"],
+      "description": "Mandatory honesty field, must match the synthesis_tier declared on the corresponding manifest element."
+    },
+    "source": {
+      "type": "string",
+      "description": "Optional pointer to the upstream source (media/ path, URL, archive reference)."
+    },
+    "method": {
+      "type": "string",
+      "description": "Optional short description of the reconstruction method used (DUSt3R-from-photo, procedural+diffusion, direct import, etc.)."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional free-text paradata."
+    }
+  }
+}

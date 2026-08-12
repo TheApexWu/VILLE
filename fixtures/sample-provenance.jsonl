@@ -1,0 +1,2 @@
+{"row_id":"row-22-chantres","entity_id":{"overture":"08f0a3f1c4d5e6f7a8b9c0d1e2f3a4b5"},"who":"Marville via DUSt3R harness","when":"2026-08-12","license":"BnF Gallica non-commercial","synthesis_tier":"light","source":"media/marville-22-chantres-1865.jpg","method":"DUSt3R-from-photo"}
+{"row_id":"row-fontaine","entity_id":{"osm":"way/123456789","wikidata":"Q123456"},"who":"Prior-infill from Turgot engraving","when":"2026-08-12","license":"CC-BY-SA 4.0","synthesis_tier":"mixed","source":"media/turgot-1739-fontaine.png","method":"constrained-diffusion+prior"}

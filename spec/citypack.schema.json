@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://ville.spec/citypack.manifest.v0-1.schema.json",
+  "title": "cityPack manifest.json v0.1",
+  "description": "VILLE cityPack manifest schema (CC0). Every geometry element carries a required synthesis_tier and a provenance row reference; no element may omit them. See spec/SPEC.md for the pack layout.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["pack", "spec_version", "city", "epoch", "entities"],
+  "properties": {
+    "pack": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Slug name of the pack directory, e.g. 'ile-de-la-cite-block'."
+    },
+    "spec_version": {
+      "type": "string",
+      "pattern": "^0\\.[0-9]+(\\.[0-9]+)?$",
+      "description": "cityPack spec version this manifest targets."
+    },
+    "city": {
+      "type": "string",
+      "minLength": 1,
+      "description": "City slug, e.g. 'paris'."
+    },
+    "epoch": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Epoch label this pack reconstructs, e.g. '1860s-haussmann-pre'. A pack is one epoch of one block; the year-slider composes packs."
+    },
+    "license": {
+      "type": "string",
+      "description": "Optional pack-level license note. Per-element licenses live in provenance.jsonl."
+    },
+    "methods": {
+      "type": "string",
+      "description": "Path to the generated methods.md for this pack."
+    },
+    "entities": {
+      "type": "array",
+      "minItems": 0,
+      "items": { "$ref": "#/$defs/entity" }
+    }
+  },
+  "$defs": {
+    "synthesis_tier": {
+      "type": "string",
+      "enum": ["none", "minimal", "light", "mixed", "heavy"],
+      "description": "Mandatory honesty field. none=direct geometric import; minimal=DUSt3R/splatting on dense photo; light=DUSt3R/MASt3R on sparse photo; mixed=fusion with diffusion/prior infill; heavy=declared fabulation. Read as two bands: evidence-grounded={none,minimal,light}, fabulated={mixed,heavy}."
+    },
+    "entity_id": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "External IDs. Overture GERS is primary; OSM id + Wikidata QID are the documented fallback. At least one of (overture | osm+wikidata) must be present.",
+      "anyOf": [
+        { "required": ["overture"] },
+        { "required": ["osm", "wikidata"] }
+      ],
+      "properties": {
+        "overture": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Overture GERS id (primary)."
+        },
+        "osm": {
+          "type": "string",
+          "minLength": 1,
+          "description": "OSM element id, e.g. 'way/123456', 'node/789', 'relation/42'."
+        },
+        "wikidata": {
+          "type": "string",
+          "pattern": "^Q[0-9]+$",
+          "description": "Wikidata QID, e.g. 'Q123456'."
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["id", "geometry", "provenance", "synthesis_tier"],
+      "properties": {
+        "id": { "$ref": "#/$defs/entity_id" },
+        "name": { "type": "string" },
+        "geometry": {
+          "type": "string",
+          "pattern": "^geometry/.+\\.(glb|gltf)$",
+          "description": "Path to the entity's glTF/glb inside the pack."
+        },
+        "provenance": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Reference to the row in provenance.jsonl for this element. Conventionally 'provenance.jsonl#<row_id>'. Per-field provenance is mandatory (hard rule)."
+        },
+        "synthesis_tier": { "$ref": "#/$defs/synthesis_tier" },
+        "textures": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^textures/.+" }
+        },
+        "media": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^media/.+" },
+          "description": "Source photos / engravings the element was reconstructed from, license-stamped per element in provenance."
+        },
+        "fragments": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^fragments/.+" },
+          "description": "Markdown narrative seeds attached to the element."
+        }
+      }
+    }
+  }
+}
