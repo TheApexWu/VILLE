@@ -1,0 +1,91 @@
+{
+  "pack": "ile-de-la-cite-block",
+  "spec_version": "0.1",
+  "city": "paris",
+  "epoch": "1860s-haussmann-pre",
+  "license": "Pack spec is CC0; per-element licenses declared in provenance.jsonl against upstream sources (BnF Gallica, etc.).",
+  "methods": "methods.md",
+  "entities": [
+    {
+      "id": {
+        "overture": "00000000000000000000000000000001",
+        "wikidata": "Q2978"
+      },
+      "name": "Notre-Dame de Paris (north flank + chevet, pre-Haussmann state)",
+      "geometry": "geometry/notre-dame-north-flank.glb",
+      "provenance": "provenance.jsonl#row-notre-dame-north-flank",
+      "synthesis_tier": "light",
+      "media": [
+        "media/marville-parvis-notre-dame-1867.jpg",
+        "media/marville-chevet-1865.jpg"
+      ],
+      "fragments": [
+        "fragments/notre-dame.md"
+      ]
+    },
+    {
+      "id": {
+        "overture": "00000000000000000000000000000002"
+      },
+      "name": "22 Rue des Chantres",
+      "geometry": "geometry/22-rue-des-chantres.glb",
+      "provenance": "provenance.jsonl#row-22-rue-des-chantres",
+      "synthesis_tier": "light",
+      "media": [
+        "media/marville-22-rue-des-chantres-1867.jpg"
+      ],
+      "fragments": [
+        "fragments/22-rue-des-chantres.md"
+      ]
+    },
+    {
+      "id": {
+        "overture": "00000000000000000000000000000003"
+      },
+      "name": "Maison de la Licorne (corner Rue de la Colombe / Rue de la Licorne)",
+      "geometry": "geometry/maison-de-la-licorne.glb",
+      "provenance": "provenance.jsonl#row-maison-de-la-licorne",
+      "synthesis_tier": "mixed",
+      "media": [
+        "media/marville-maison-licorne-1867.jpg",
+        "media/turgot-1739-licorne-engraving.png"
+      ],
+      "fragments": [
+        "fragments/maison-de-la-licorne.md"
+      ]
+    },
+    {
+      "id": {
+        "overture": "00000000000000000000000000000004"
+      },
+      "name": "14 Rue du Cloître-Notre-Dame",
+      "geometry": "geometry/14-rue-du-cloitre.glb",
+      "provenance": "provenance.jsonl#row-14-rue-du-cloitre",
+      "synthesis_tier": "light",
+      "media": [
+        "media/marville-14-rue-du-cloitre-1867.jpg"
+      ]
+    },
+    {
+      "id": {
+        "overture": "00000000000000000000000000000005"
+      },
+      "name": "1 Rue de la Colombe (carved-pigeon corner house)",
+      "geometry": "geometry/1-rue-de-la-colombe.glb",
+      "provenance": "provenance.jsonl#row-1-rue-de-la-colombe",
+      "synthesis_tier": "light",
+      "media": [
+        "media/marville-1-rue-de-la-colombe-1867.jpg"
+      ]
+    },
+    {
+      "id": {
+        "overture": "00000000000000000000000000000006"
+      },
+      "name": "Well in the Parvis Notre-Dame (lost street furniture)",
+      "geometry": "geometry/parvis-well.glb",
+      "provenance": "provenance.jsonl#row-parvis-well",
+      "synthesis_tier": "heavy"
+    }
+  ]
+}

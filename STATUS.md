@@ -16,7 +16,7 @@ pack's license — packs only carry content + per-element provenance.
 |---|---|---|
 | 0 | Repo scaffold + preflight | done |
 | 1 | cityPack v0.1 spec (CC0) | done |
-| 2 | One Île-de-la-Cité block manifest, hand-built | pending |
+| 2 | One Île-de-la-Cité block manifest, hand-built | done |
 | 3 | Reconstruction pipeline scaffold (DUSt3R/MASt3R harness) | pending (human gate) |
 | 4 | Provenance validator | pending |
 | 5 | PSX/Shenmue web viewer + year-slider | pending |
