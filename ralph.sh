@@ -25,8 +25,13 @@ next_milestone() {
   python3 - <<'EOF'
 import json
 prd = json.load(open("PRD.JSON"))
+done = {m["id"] for m in prd["milestones"] if m.get("completed", False)}
 for m in prd["milestones"]:
-    if not m.get("completed", False):
+    if m.get("completed", False):
+        continue
+    if m.get("human_gate", False):
+        continue  # loop NEVER runs a human-gate milestone (M3 recon quality, M6 essay) — Alex certifies those
+    if all(d in done for d in m.get("deps", [])):
         print(f"{m['id']}\t{m['name']}")
         break
 EOF
@@ -104,10 +109,10 @@ while true; do
 
   target="$(next_milestone)"
   if [ -z "$target" ]; then
-    update_ralph_md "$last_finished" "ALL MILESTONES COMPLETE"
-    append_history "ALL MILESTONES COMPLETE"
+    update_ralph_md "$last_finished" "NO ELIGIBLE MILESTONES LEFT (human-gate or dep-blocked remain)"
+    append_history "STOP: no eligible milestone (human-gate M3/M6 or dep-blocked M7 remain — Alex certifies those)"
     commit_and_push "ralph: all milestones complete"
-    echo "All milestones complete."
+    echo "Loop done: all machine-verifiable milestones built. Remaining are human-gate (M3 recon, M6 essay) or blocked on them."
     exit 0
   fi
 
