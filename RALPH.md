@@ -11,3 +11,4 @@
 ## Handoff notes (read docs-notes/m0-preflight.md for detail)
 - Puppeteer/macOS extraction drops the Chrome Frameworks binary; preflight self-heals it from the cached zip. Do not delete ~/.cache/puppeteer/chrome/*.zip.
 - ajv-cli + puppeteer are local node_modules (gitignored); viewer (M5) gets its own package.json under viewer/.
+- 2026-08-12T14:09:28Z RETRY milestone 0 (exit=0, not marked completed; attempt 1 logged to logs/milestone-0-attempt-1.log)

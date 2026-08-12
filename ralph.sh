@@ -37,9 +37,9 @@ milestone_completed() {
   python3 - "$1" <<'EOF'
 import json, sys
 prd = json.load(open("PRD.JSON"))
-mid = int(sys.argv[1])
-m = next(m for m in prd["milestones"] if m["id"] == mid)
-sys.exit(0 if m.get("completed", False) else 1)
+mid = str(sys.argv[1])
+m = next((m for m in prd["milestones"] if str(m["id"]) == mid), None)
+sys.exit(0 if (m and m.get("completed", False)) else 1)
 EOF
 }
 
