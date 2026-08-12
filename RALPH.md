@@ -1,8 +1,8 @@
 # RALPH loop status
 
-- updated: 2026-08-12T23:50:00Z
+- updated: 2026-08-12T22:11:47Z
 - last finished: milestone 4: Provenance validator
-- currently working on: (idle — next iteration picks up M3 or M5)
+- currently working on: (between milestones)
 
 ## Iteration history
 - 2026-08-12T14:03:17Z START iteration 1 -> milestone 0 (Repo scaffold + preflight), attempt 1
@@ -27,3 +27,4 @@
 - 2026-08-12T22:04:28Z DONE milestone 2 (One Île-de-la-Cité block manifest, hand-built)
 - 2026-08-12T22:04:30Z START iteration 3 -> milestone 4 (Provenance validator), attempt 1
 - 2026-08-12T23:50:00Z DONE milestone 4 — pipeline/validate_pack.py shipped (stdlib-only, schema-tolerant; enforces id/geometry/provenance-ref/synthesis_tier on entity, who/when/license/synthesis_tier on row, tier agreement, entity_id key-for-key match, no orphan rows; emits 5-tier histogram + band totals). 2 broken fixture packs (bad-pack-missing-row, bad-pack-bad-tier). All 3 verifications green. Notes in docs-notes/m4-provenance-validator.md.
+- 2026-08-12T22:11:47Z DONE milestone 4 (Provenance validator)
