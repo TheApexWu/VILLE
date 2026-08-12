@@ -1,0 +1,47 @@
+{
+  "pack": "ile-de-la-cite-block-1880",
+  "spec_version": "0.1",
+  "city": "paris",
+  "epoch": "1880s-haussmann-post",
+  "license": "Pack spec is CC0; per-element licenses declared in provenance.jsonl against upstream sources (BnF Gallica, etc.).",
+  "methods": "methods.md",
+  "entities": [
+    {
+      "id": {
+        "overture": "00000000000000000000000000000001",
+        "wikidata": "Q2978"
+      },
+      "name": "Notre-Dame de Paris (north flank + chevet, post-clearance state)",
+      "geometry": "geometry/notre-dame-north-flank.glb",
+      "provenance": "provenance.jsonl#row-notre-dame-north-flank",
+      "synthesis_tier": "light",
+      "media": [
+        "media/marville-chevet-1880.jpg"
+      ],
+      "fragments": [
+        "fragments/notre-dame.md"
+      ]
+    },
+    {
+      "id": {
+        "overture": "00000000000000000000000000000007"
+      },
+      "name": "Haussmann-era apartment block on cleared Parvis perimeter",
+      "geometry": "geometry/parvis-haussmann-block.glb",
+      "provenance": "provenance.jsonl#row-parvis-haussmann-block",
+      "synthesis_tier": "light",
+      "media": [
+        "media/haussmann-parvis-1880.jpg"
+      ]
+    },
+    {
+      "id": {
+        "overture": "00000000000000000000000000000008"
+      },
+      "name": "New lamp post on Parvis (street furniture)",
+      "geometry": "geometry/parvis-lamp-post.glb",
+      "provenance": "provenance.jsonl#row-parvis-lamp-post",
+      "synthesis_tier": "mixed"
+    }
+  ]
+}

@@ -157,7 +157,13 @@
         "toggling evidence-only mode changes the rendered set — {mixed,heavy} elements are hidden/ghosted while {none,minimal,light} stay (assert via a headless DOM/state check)"
       ],
       "human_gate": false,
-      "completed": false
+      "completed": true,
+      "evidence": [
+        "viewer builds (vite build exits 0): `cd viewer && npx vite build` -> `built in 539ms`, emits dist/index.html + dist/assets/index-*.js (~510 KB three.js bundle) + dist/packs/ (both epoch packs copied).",
+        "headless chromium screenshot of the built viewer contains a rendering <canvas> and no console errors: puppeteer + swiftshader WebGL loads the built viewer, `canvas#viewer-canvas` present, 0 viewer console errors after filtering environmental noise (favicon 404 / headless-GPU probe); screenshot at evidence/m5-viewer-screenshot.png (640x480 PNG, 40 KB, non-blank).",
+        "the year-slider DOM control is present and changing it swaps the visible epoch: `#year-slider` present; setting value 0->1 swaps hud-state[data-active-epoch] from `ile-de-la-cite-block` -> `ile-de-la-cite-block-1880` (verified before/after by scripts/verify_viewer.mjs).",
+        "toggling evidence-only mode changes the rendered set: turning on #mode-toggle sets hud-state[data-evidence-only]=true and hud-state[data-fabulated-ghosted-count] 0->2 (maison-de-la-licorne mixed + parvis-well heavy ghosted to uOpacity=0.15), while hud-state[data-visible-count] stays at 6 (ghosted not hidden — T2 opacity, not erasure)."
+      ]
     },
     {
       "id": "6",

@@ -19,7 +19,7 @@ pack's license — packs only carry content + per-element provenance.
 | 2 | One Île-de-la-Cité block manifest, hand-built | done |
 | 3 | Reconstruction pipeline scaffold (DUSt3R/MASt3R harness) | pending (human gate) |
 | 4 | Provenance validator | done |
-| 5 | PSX/Shenmue web viewer + year-slider | pending |
+| 5 | PSX/Shenmue web viewer + year-slider | done |
 | 6 | methods.md generator + essay scaffold | pending (human gate) |
 | 7 | First public release packaging | pending |
 

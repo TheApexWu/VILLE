@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <title>VILLE — Île-de-la-Cité PSX viewer</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="hud">
+      <div id="hud-epoch">
+        <label for="year-slider">year</label>
+        <input id="year-slider" type="range" min="0" max="1" step="1" value="0" />
+        <span id="epoch-label">—</span>
+      </div>
+      <div id="hud-mode">
+        <label for="mode-toggle">evidence-only</label>
+        <input id="mode-toggle" type="checkbox" />
+      </div>
+      <div id="hud-state"
+        data-active-epoch=""
+        data-active-epoch-name=""
+        data-evidence-only="false"
+        data-visible-count="-1"
+        data-fabulated-visible-count="-1"
+        data-canvas-present="false"></div>
+      <div id="hud-histogram"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
