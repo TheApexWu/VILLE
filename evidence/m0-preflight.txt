@@ -1,0 +1,15 @@
+# M0 — Repo scaffold + preflight — evidence (2026-08-12)
+
+V1  scripts/preflight.sh exits 0
+    verified: `preflight: ALL CHECKS PASS` (exit 0); idempotent re-run exit 0.
+    preflight asserts: node>=18 (26.7.0), python3>=3.10 (3.14.3), git clean of
+    *.env/*.pem/*.key/id_rsa/id_ed25519/*.p12/credentials.json/secrets.json,
+    ajv-cli in local node_modules, headless chromium smoke-launch (Chrome/148.0.7778.97).
+
+V2  the six target directories exist
+    spec/ pipeline/ viewer/ packs/ docs-notes/ evidence/ fixtures/ all present
+    (7/7; PRD verification floor of six satisfied).
+
+V3  git tree has no untracked secrets
+    `git ls-files --others --exclude-standard` -> 0 secret matches
+    `git ls-files` (tracked)                  -> 0 secret matches

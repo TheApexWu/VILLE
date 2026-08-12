@@ -1,0 +1,11 @@
+{
+  "name": "ville",
+  "version": "0.0.0",
+  "private": true,
+  "description": "VILLE — historical urban-geometry reconstruction. Body of work, not startup. Preflight tooling only here; viewer (M5) gets its own package.json under viewer/.",
+  "license": "MIT",
+  "devDependencies": {
+    "ajv-cli": "^5.0.0",
+    "puppeteer": "^24.0.0"
+  }
+}

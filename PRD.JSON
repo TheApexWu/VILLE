@@ -36,7 +36,12 @@
         "git tree has no untracked secrets (no *.env, no keys)"
       ],
       "human_gate": false,
-      "completed": false
+      "completed": true,
+      "evidence": [
+        "scripts/preflight.sh exits 0: verified `preflight: ALL CHECKS PASS` (exit 0) on this machine; idempotent re-run also 0.",
+        "the six target directories exist: all seven dirs (spec/ pipeline/ viewer/ packs/ docs-notes/ evidence/ fixtures/) present with .gitkeep — PRD verification floor of six met.",
+        "git tree has no untracked secrets: `git ls-files --others --exclude-standard` and `git ls-files` both return zero matches for *.env/*.pem/*.key/id_rsa/id_ed25519/*.p12/credentials.json/secrets.json."
+      ]
     },
     {
       "id": "1",
