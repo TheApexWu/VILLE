@@ -1,8 +1,8 @@
 # RALPH loop status
 
-- updated: 2026-08-12T22:30:00Z
-- last finished: milestone 1 — cityPack v0.1 spec (CC0)
-- currently working on: (idle — next iteration should pick milestone 2 or 3)
+- updated: 2026-08-12T22:00:32Z
+- last finished: milestone 1: cityPack v0.1 spec (CC0)
+- currently working on: (between milestones)
 
 ## Iteration history
 - 2026-08-12T14:03:17Z START iteration 1 -> milestone 0 (Repo scaffold + preflight), attempt 1
@@ -16,3 +16,4 @@
 - `synthesis_tier` is required on both manifest entity AND provenance row; they must agree (M4 enforces, M2 keeps in sync by hand).
 - `additionalProperties: true` on manifest + entity — extensions first-class; M4 enforces required contract only, not schema lock.
 - Puppeteer/macOS Frameworks extraction quirk still applies (see m0-preflight.md) — preflight self-heals it.
+- 2026-08-12T22:00:32Z DONE milestone 1 (cityPack v0.1 spec (CC0))
