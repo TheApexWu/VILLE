@@ -1,8 +1,8 @@
 # RALPH loop status
 
-- updated: 2026-08-12T22:20:25Z
+- updated: 2026-08-12T22:20:26Z
 - last finished: milestone 5: PSX/Shenmue web viewer + year-slider
-- currently working on: (between milestones)
+- currently working on: NO ELIGIBLE MILESTONES LEFT (human-gate or dep-blocked remain)
 
 ## Iteration history
 - 2026-08-12T14:03:17Z START iteration 1 -> milestone 0 (Repo scaffold + preflight), attempt 1
@@ -31,3 +31,4 @@
 - 2026-08-12T22:11:48Z START iteration 4 -> milestone 5 (PSX/Shenmue web viewer + year-slider), attempt 1
 - 2026-08-12T23:30:00Z DONE milestone 5 — viewer/ (Vite + TS + three.js) shipped: PSX shader pack (vertex lighting + Bayer dither + fog + scanlines + magenta fabulation tint), cityPack loader with placeholder geometry fallback, year-slider swapping two epochs (M2 pack + new ile-de-la-cite-block-1880 stub), evidence-only ghosting of {mixed,heavy} (uOpacity 0.15). All 4 verifications green via scripts/verify_viewer.mjs (headless puppeteer + swiftshader). Notes in docs-notes/m5-viewer.md.
 - 2026-08-12T22:20:25Z DONE milestone 5 (PSX/Shenmue web viewer + year-slider)
+- 2026-08-12T22:20:26Z STOP: no eligible milestone (human-gate M3/M6 or dep-blocked M7 remain — Alex certifies those)
