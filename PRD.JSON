@@ -19,7 +19,10 @@
       "docs/reading-list.md — DUSt3R/MASt3R/VGGT, Gaussian Splatting, Overture GERS, critical cartography (Harley/Wood/Pickles/Scott/Glissant)"
     ]
   },
-  "defaults": { "model": "openrouter/z-ai/glm-5.2", "effort": "high" },
+  "defaults": {
+    "model": "openrouter/z-ai/glm-5.2",
+    "effort": "high"
+  },
   "milestones": [
     {
       "id": "0",
@@ -46,7 +49,9 @@
     {
       "id": "1",
       "name": "cityPack v0.1 spec (CC0)",
-      "deps": ["0"],
+      "deps": [
+        "0"
+      ],
       "tasks": [
         "Author spec/citypack.schema.json — a JSON Schema for manifest.json: entities with id (Overture GERS primary; OSM id + Wikidata QID fallback), geometry ref (glTF/glb path), and per-element provenance ref.",
         "Author spec/SPEC.md (~200 lines, CC0) describing the pack layout: manifest.json, geometry/, textures/, fragments/, media/, provenance.jsonl, schema/, methods.md.",
@@ -64,7 +69,9 @@
     {
       "id": "2",
       "name": "One Île-de-la-Cité block manifest, hand-built",
-      "deps": ["1"],
+      "deps": [
+        "1"
+      ],
       "tasks": [
         "Pick one pre-Haussmann Île-de-la-Cité block with rich Marville coverage; build packs/ile-de-la-cite-block/manifest.json by hand.",
         "Populate provenance.jsonl: one row per element with who/when/license/synthesis_tier (this block is mostly 'light' — DUSt3R-from-photo tier — with any inferred infill marked 'mixed'/'heavy').",
@@ -81,7 +88,9 @@
     {
       "id": "3",
       "name": "Reconstruction pipeline scaffold (DUSt3R/MASt3R harness)",
-      "deps": ["0"],
+      "deps": [
+        "0"
+      ],
       "tasks": [
         "pipeline/reconstruct.py: takes a directory of images + config, runs DUSt3R or MASt3R (reference impl), writes a point cloud .ply and a run-manifest recording model/version/params.",
         "Ship fixtures/photos/ with a tiny public multi-view image set so the harness is runnable without the real archive.",
@@ -99,7 +108,9 @@
     {
       "id": "4",
       "name": "Provenance validator",
-      "deps": ["1"],
+      "deps": [
+        "1"
+      ],
       "tasks": [
         "pipeline/validate_pack.py: assert every geometry element referenced in manifest.json has a provenance.jsonl row with a valid synthesis_tier and license, and that no orphan provenance rows exist.",
         "Emit a synthesis-tier histogram (how much of the pack is none/minimal/.../heavy) — the honesty summary."
@@ -115,16 +126,20 @@
     {
       "id": "5",
       "name": "PSX/Shenmue web viewer + year-slider",
-      "deps": ["1"],
+      "deps": [
+        "1"
+      ],
       "tasks": [
         "viewer/: Three.js or R3F + TypeScript, loads a cityPack and renders its geometry with a PSX shader pack (vertex lighting, dithered shadows, soft fog, warm-rust palette, light CRT scanlines).",
         "Year-slider that crossfades between two epochs of the same block (use M2 pack + a second stub epoch).",
-        "Pure renderer — ZERO runtime ML (hard rule)."
+        "Pure renderer — ZERO runtime ML (hard rule).",
+        "Hallucinate vs. evidence-only mode: a viewer toggle driven by synthesis_tier (see docs/DIRECTION.md). Evidence-only hides/ghosts {mixed,heavy} elements; full mode renders all but visually marks fabulated geometry with a distinct material. Realizes thesis T2 (right to opacity)."
       ],
       "verifications": [
         "viewer builds (vite build exits 0)",
         "headless chromium screenshot of the built viewer contains a rendering <canvas> and no console errors",
-        "the year-slider DOM control is present and changing it swaps the visible epoch (assert via a DOM/state check in a headless script)"
+        "the year-slider DOM control is present and changing it swaps the visible epoch (assert via a DOM/state check in a headless script)",
+        "toggling evidence-only mode changes the rendered set — {mixed,heavy} elements are hidden/ghosted while {none,minimal,light} stay (assert via a headless DOM/state check)"
       ],
       "human_gate": false,
       "completed": false
@@ -132,7 +147,10 @@
     {
       "id": "6",
       "name": "methods.md generator + essay scaffold",
-      "deps": ["2", "4"],
+      "deps": [
+        "2",
+        "4"
+      ],
       "tasks": [
         "pipeline/gen_methods.py: from a pack's provenance, generate methods.md with the per-epoch synthesis_tier table.",
         "Draft docs/essays/ile-de-la-cite.md (~2000w scaffold) on Haussmann's clearances and opacity-by-design — structure + evidence hooks, left for Alex to voice."
@@ -148,7 +166,11 @@
     {
       "id": "7",
       "name": "First public release packaging",
-      "deps": ["2", "3", "5"],
+      "deps": [
+        "2",
+        "3",
+        "5"
+      ],
       "tasks": [
         "Wire the viewer to load packs/ile-de-la-cite-block + the M3 pipeline output, produce a static, deploy-ready build.",
         "Write README release notes linking the pack, methods.md, and the viewer."
