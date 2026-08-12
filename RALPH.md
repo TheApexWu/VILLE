@@ -1,8 +1,8 @@
 # RALPH loop status
 
-- updated: 2026-08-12T23:30:00Z
+- updated: 2026-08-12T22:04:28Z
 - last finished: milestone 2: One Île-de-la-Cité block manifest, hand-built
-- currently working on: (next iteration picks milestone 3 or 4 — both unblocked; PRD deps: M3 deps [0], M4 deps [1])
+- currently working on: (between milestones)
 
 ## Iteration history
 - 2026-08-12T14:03:17Z START iteration 1 -> milestone 0 (Repo scaffold + preflight), attempt 1
@@ -24,3 +24,4 @@
 - 2026-08-12T22:00:32Z DONE milestone 1 (cityPack v0.1 spec (CC0))
 - 2026-08-12T22:00:34Z START iteration 2 -> milestone 2 (One Île-de-la-Cité block manifest, hand-built), attempt 1
 - 2026-08-12T23:30:00Z DONE milestone 2 (One Île-de-la-Cité block manifest, hand-built)
+- 2026-08-12T22:04:28Z DONE milestone 2 (One Île-de-la-Cité block manifest, hand-built)
